@@ -10,7 +10,7 @@ const Api = () => {
 
     const getQuestion = () => {
         let result = []
-        const url = `https://www.career.go.kr/inspct/openapi/test/questions?apikey=${key}&q=10`
+        const url = `https://www.career.go.kr/inspct/openapi/test/questions?apikey=${key}&q=5`
         axios.get(url)
             .then(res=> {
                 result = res.data["RESULT"];
