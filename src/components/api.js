@@ -2,36 +2,29 @@ import React,{useEffect, useState} from 'react';
 import axios from 'axios';
 
 const Api = () => {
-    const [result,setResult] = useState("")
-
+    const [questions,setQuestions] = useState([])
+    const key = 'a4c80b03ef9a8b8df73cf7b36775257c'
     useEffect(()=>{
-        setResult(()=>{
-            console.log(result)
-            getQuestion()
-        })
+        getQuestion()
     },[])
 
-    const getQuestion = async () => {
-        let questions = null
-        const url = `https://www.career.go.kr/inspct/openapi/test/questions?apikey=a4c80b03ef9a8b8df73cf7b36775257c&q=10`
-        await axios.get(url)
+    const getQuestion = () => {
+        let result = []
+        const url = `https://www.career.go.kr/inspct/openapi/test/questions?apikey=${key}&q=10`
+        axios.get(url)
             .then(res=> {
-                questions = res.data["RESULT"][0]["question"];
-                console.log(res.data)
-                console.log("RES:" + questions);
-            }
-                )
-            .catch(err=>questions = err)
-        return questions
+                result = res.data["RESULT"];
+                console.log(result)
+                setQuestions(result)
+            })
+            .catch(err=> result = err)
     }
 
+    
     return (
             <div>
                 <h4>GET 요청해보기</h4>
-                <div>
-                    {console.log(result)}
-                    {result}
-                </div>
+                {questions.map((question)=>{return (<p>{question['question']}</p>)})}
             </div>
         )
 }
