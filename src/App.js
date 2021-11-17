@@ -26,8 +26,6 @@ function App() {
         <Switch>
           <Route exact path="/" component={User}/>
           {/* <Route exact path="/user" component={User}/>         사용자 */}
-          
-          <Route path="/api" component={Api}/>           {/* 검사 문제 */}
           <Route exact path="/test" component={Example}/>   {/* 검사 예시 페이지 */}
           <Route path="/test/:id" component={Api}/>         {/* 검사 페이지 */}
           

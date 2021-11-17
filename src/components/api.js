@@ -7,9 +7,7 @@ const Api = () => {
     const [questions,setQuestions] = useState([])
     const key = 'a4c80b03ef9a8b8df73cf7b36775257c'
     
-
-
-    const getQuestion = useCallback(async () => {
+    const getQuestions = useCallback(async () => {
         let result = []
         const url = `https://www.career.go.kr/inspct/openapi/test/questions?apikey=${key}&q=5`
         await axios.get(url)
@@ -22,8 +20,8 @@ const Api = () => {
     },[]);
 
     useEffect(()=>{
-        getQuestion();
-    },[getQuestion]);
+        getQuestions();
+    },[getQuestions]);
 
     return (
             <div>
