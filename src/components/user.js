@@ -11,7 +11,7 @@ import React,{useState} from "react";
 // - 이름을 올바르게 입력하지 않았을 경우, 이에 대한 안내 메세지를 출력합니다.
 // - 성별을 선택하지 않았을 경우, 이에 대한 안내 메세지를 출력합니다.
 
-const User = ({history}) => {
+const Home = ({history}) => {
 
     const [name,setName] = useState('')
     const [gender,setGender] = useState("gender")
@@ -44,4 +44,4 @@ const User = ({history}) => {
     </div>)
 }
 
-export default User;
+export default Home;
