@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Qestnr from './atom/qestnr';
+
 // 구현 ----------------------------------------
 // - 이름을 입력할 수 있는 input form을 구현합니다.
 // - 성별을 선택할 수 있는 input form을 구현합니다.
@@ -13,30 +14,50 @@ import Qestnr from './atom/qestnr';
 
 const Home = ({ history }) => {
   const [name, setName] = useState('');
-  const [gender, setGender] = useState('gender');
-  //const [qestnrSeq, setQestnrSeq] = useState(5);
+  const [selectedGender, setSelectedGender] = useState(null);
+  const [seq, setSeq] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    const timestamp = +new Date();
+    const profile = {};
+    profile['name'] = name;
+    profile['gender'] = selectedGender;
+    profile['qestrnSeq'] = seq;
+    profile['startDtm'] = timestamp;
+    profile['answer'] = '';
+    profile['tgetSe'] = '100214';
     // history를 통해 검사시작 화면으로 이동
-    history.push('/example');
+    history.push({
+      pathname: '/example',
+      userProfile: profile,
+    });
   };
 
   const handleClick = (e) => {
-    setGender(e.target.id);
+    const id = e.target.id;
+    if (id === 'radio_man') {
+      setSelectedGender('남자');
+    } else if (id === 'radio_woman') {
+      setSelectedGender('여자');
+    }
   };
 
-  const [seq, setSeq] = useState(0);
   const handleSelect = (value) => {
-    console.log(value);
     setSeq(value);
-    console.log(seq);
   };
   // 버튼 활성화
 
   return (
-    <div>
+    <div
+      style={{
+        margin: '10px auto',
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        boxSizing: 'border-box',
+      }}
+    >
       <h1>직업가치관검사</h1>
       <form onSubmit={handleSubmit}>
         <div className="name">
@@ -60,33 +81,34 @@ const Home = ({ history }) => {
           role="group"
           aria-label="Basic radio toggle button group"
         >
+          <label>성별</label>
           <input
             type="radio"
             class="btn-check"
-            name="btnradio"
-            id="btnradio1"
+            name="btngender"
+            id="radio_man"
             autocomplete="off"
             onClick={handleClick}
           />
-          <label class="btn btn-outline-primary" for="btnradio1">
+          <label class="btn btn-outline-primary" for="radio_man">
             남자
           </label>
 
           <input
             type="radio"
             class="btn-check"
-            name="btnradio"
-            id="btnradio2"
+            name="btngender"
+            id="radio_woman"
             autocomplete="off"
             onClick={handleClick}
           />
-          <label class="btn btn-outline-primary" for="btnradio2">
+          <label class="btn btn-outline-primary" for="radio_woman">
             여자
           </label>
         </div>
 
         <div className="btn">
-          {name && gender !== 'gender' && seq > 0 ? (
+          {name && selectedGender && seq > 0 ? (
             <Button type="submit">검사 시작</Button>
           ) : (
             <Button type="submit" disabled>

@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 // 심리검사변수를 정하는 버튼
 
 const Qestnr = ({ onSelect, seq }) => {
-  const [seqList, setSeqList] = useState(qestnrSeqList);
+  const seqList = qestnrSeqList;
 
   const [display, setDisplay] = useState(false);
 

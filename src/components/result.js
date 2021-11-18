@@ -1,6 +1,11 @@
 import React from 'react';
+import { useHistory } from 'react-router';
+import '../App.css';
+import Button from 'react-bootstrap/Button';
 
-const Result = ({ history }) => {
+const Result = ({ location }) => {
+  const userProfile = location.userProfile;
+  const history = useHistory();
   const handleSubmit = (e) => {
     e.preventDefault();
     history.replace('/');
@@ -16,14 +21,16 @@ const Result = ({ history }) => {
           <td>성별</td>
           <td>검사일</td>
         </tr>
-        <tr>
-          <td>엘리스</td>
-          <td>남</td>
-          <td>검사일</td>
-        </tr>
+        {userProfile && (
+          <tr>
+            <td>{userProfile['name']}</td>
+            <td>{userProfile['gender']}</td>
+            <td>{userProfile['startDtm']}</td>
+          </tr>
+        )}
       </table>
       <form onSubmit={handleSubmit}>
-        <button type="submit">다시 검사하기</button>
+        <Button type="submit">다시 검사하기</Button>
       </form>
     </div>
   );

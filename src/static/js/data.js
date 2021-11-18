@@ -24,15 +24,15 @@ qestnrSeqMap.forEach((key, value) => {
 });
 
 export const trgetSe = new Map();
-trgetSe.set('초등학생', 100205);
-trgetSe.set('중학생', 100206);
-trgetSe.set('고등학생', 100207);
-trgetSe.set('대학생', 100208);
-trgetSe.set('일반', 100209);
-trgetSe.set('일반(학부모)', 100210);
-trgetSe.set('교사', 100214);
-trgetSe.set('교사(상담)', 100215);
+trgetSe.set('초등학생', '100205');
+trgetSe.set('중학생', '100206');
+trgetSe.set('고등학생', '100207');
+trgetSe.set('대학생', '100208');
+trgetSe.set('일반', '100209');
+trgetSe.set('일반(학부모)', '100210');
+trgetSe.set('교사', '100214');
+trgetSe.set('교사(상담)', '100215');
 
-export const gender = new Map();
-gender.set('남자', 100205);
-gender.set('여자', 100206);
+export const gender = {};
+gender['100205'] = '남자';
+gender['100206'] = '여자';

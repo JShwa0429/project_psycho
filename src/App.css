@@ -62,3 +62,32 @@ div .footer {
   background-color: #f0f1f3;
   width: 100%;
 }
+
+table {
+  border-collapse: collapse;
+  border: 1px solid #444444;
+  background-color: #ffebb5;
+  border-radius: 16px;
+  box-shadow: inset 0 0 8px #deb13a;
+  width: 100%;
+  height: 100px;
+}
+
+tr:nth-child(odd) {
+  background-color: #e6f1ff;
+}
+tr:nth-child(even) {
+  background-color: #f0f7ff;
+}
+
+td {
+  padding: 5px;
+}
+
+button {
+  background-color: aqua;
+
+  font-size: large;
+  width: 200px;
+  height: 100px;
+}
