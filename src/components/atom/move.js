@@ -1,6 +1,6 @@
-import React from 'react';
-import { useHistory, useLocation } from 'react-router';
-import Button from 'react-bootstrap/Button';
+import React from "react";
+import { useHistory, useLocation } from "react-router";
+import Button from "react-bootstrap/Button";
 const Move = (props) => {
   const history = useHistory();
   const location = useLocation();
@@ -10,9 +10,9 @@ const Move = (props) => {
   const handleMove = (e) => {
     e.preventDefault();
     let move = e.target.id;
-    if (move === 'btn_prev') {
+    if (move === "btn_prev") {
       history.goBack();
-    } else if (move === 'btn_next') {
+    } else if (move === "btn_next") {
       history.push({
         pathname: next,
         userProfile: userProfile,

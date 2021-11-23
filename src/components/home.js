@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Qestnr from './atom/qestnr';
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Qestnr from "./atom/qestnr";
 
 // 구현 ----------------------------------------
 // - 이름을 입력할 수 있는 input form을 구현합니다.
@@ -13,7 +13,7 @@ import Qestnr from './atom/qestnr';
 // - 성별을 선택하지 않았을 경우, 이에 대한 안내 메세지를 출력합니다.
 
 const Home = ({ history }) => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [selectedGender, setSelectedGender] = useState(null);
   const [seq, setSeq] = useState(0);
 
@@ -21,25 +21,25 @@ const Home = ({ history }) => {
     e.preventDefault();
     const timestamp = +new Date();
     const profile = {};
-    profile['name'] = name;
-    profile['gender'] = selectedGender;
-    profile['qestrnSeq'] = seq;
-    profile['startDtm'] = timestamp;
-    profile['answer'] = '';
-    profile['tgetSe'] = '100214';
+    profile["name"] = name;
+    profile["gender"] = selectedGender;
+    profile["qestrnSeq"] = seq;
+    profile["startDtm"] = timestamp;
+    profile["answer"] = "";
+    profile["tgetSe"] = "100214";
     // history를 통해 검사시작 화면으로 이동
     history.push({
-      pathname: '/example',
+      pathname: "/test",
       userProfile: profile,
     });
   };
 
   const handleClick = (e) => {
     const id = e.target.id;
-    if (id === 'radio_man') {
-      setSelectedGender('남자');
-    } else if (id === 'radio_woman') {
-      setSelectedGender('여자');
+    if (id === "radio_man") {
+      setSelectedGender("남자");
+    } else if (id === "radio_woman") {
+      setSelectedGender("여자");
     }
   };
 
@@ -49,18 +49,10 @@ const Home = ({ history }) => {
   // 버튼 활성화
 
   return (
-    <div
-      style={{
-        margin: '10px auto',
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        boxSizing: 'border-box',
-      }}
-    >
-      <h1>직업가치관검사</h1>
+    <div className="userform">
       <form onSubmit={handleSubmit}>
-        <div className="name">
+        <h1>직업가치관검사</h1>
+        <div className="name" style={{ padding: "10px" }}>
           <label class="name">이름</label>
           <input
             type="text"
@@ -71,13 +63,13 @@ const Home = ({ history }) => {
           ></input>
         </div>
 
-        <div className="qestnrSeq">
-          <label class="name">구분</label>
+        <div className="qestnrSeq justify-content">
+          <label>구분</label>
           <Qestnr onSelect={handleSelect} seq={seq} />
         </div>
 
         <div
-          class="btn-group"
+          class="gender justify-content"
           role="group"
           aria-label="Basic radio toggle button group"
         >
@@ -85,9 +77,8 @@ const Home = ({ history }) => {
           <input
             type="radio"
             class="btn-check"
-            name="btngender"
+            name="gender"
             id="radio_man"
-            autocomplete="off"
             onClick={handleClick}
           />
           <label class="btn btn-outline-primary" for="radio_man">
@@ -97,9 +88,8 @@ const Home = ({ history }) => {
           <input
             type="radio"
             class="btn-check"
-            name="btngender"
+            name="gender"
             id="radio_woman"
-            autocomplete="off"
             onClick={handleClick}
           />
           <label class="btn btn-outline-primary" for="radio_woman">
@@ -107,7 +97,7 @@ const Home = ({ history }) => {
           </label>
         </div>
 
-        <div className="btn">
+        <div className="btn justify-content">
           {name && selectedGender && seq > 0 ? (
             <Button type="submit">검사 시작</Button>
           ) : (

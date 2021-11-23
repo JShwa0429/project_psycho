@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { qestnrSeqList, qestnrSeqMap } from '../../static/js/data';
-import Button from 'react-bootstrap/Button';
+import React, { useState } from "react";
+import { qestnrSeqList, qestnrSeqMap } from "../../static/js/data";
+import Button from "react-bootstrap/Button";
 // 심리검사변수를 정하는 버튼
 
 const Qestnr = ({ onSelect, seq }) => {
@@ -19,9 +19,9 @@ const Qestnr = ({ onSelect, seq }) => {
   };
 
   return (
-    <div>
+    <div className="qestnr">
       <Button onClick={handleOpen}>
-        {seq > 0 ? qestnrSeqMap.get(seq) : '선택해주세요'}
+        {seq > 0 ? qestnrSeqMap.get(seq) : "선택해주세요"}
       </Button>
       {display && (
         <ul>

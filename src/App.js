@@ -1,6 +1,6 @@
-import { BrowserRouter as Router } from 'react-router-dom';
-import './App.css';
-import UserInput from './PsychoTest/UserInput';
+import { BrowserRouter as Router } from "react-router-dom";
+import "./App.css";
+import UserInput from "./PsychoTest/UserInput";
 
 function App() {
   return (

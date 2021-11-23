@@ -1,16 +1,14 @@
-import Button from 'react-bootstrap/Button';
-import React, { useState } from 'react';
-import './card.css';
+import React, { useState } from "react";
+import "./card.css";
 
 const Card = ({ question, onSelect }) => {
-  const [selectAnswer, setSelectAnswer] = useState(null);
-  const handleClick = (e) => {
-    setSelectAnswer(e.target.value);
-    onSelect(selectAnswer);
+  const handleChange = (qitemNo, answerScore) => {
+    onSelect(qitemNo, answerScore);
   };
+  const [selectValue, setSelectValue] = useState(null);
 
-  const qestStr = `문제${question['qitemNo']}. ${question['question']}`;
-  qestStr.split('<br/>').map((line) => {
+  const qestStr = `문제${question["qitemNo"]}. ${question["question"]}`;
+  qestStr.split("<br/>").map((line) => {
     return (
       <span>
         {line}
@@ -20,15 +18,31 @@ const Card = ({ question, onSelect }) => {
   });
 
   const answer = [];
-  let index = '01';
   for (let i = 1; i < 11; i++) {
-    index = i < 10 ? '0' + i.toString() : '10';
-    if (question['answer' + index] == null) break;
-
+    if (question["answer0" + i] == null) break;
     answer.push(
-      <Button onClick={handleClick} value={question['answerScore' + index]}>
-        {question['answer' + index]}
-      </Button>,
+      // <Button onClick={handleClick} value={question["answerScore" + index]}>
+      //   {question["answer" + index]}
+      // </Button>
+      <div className="form-check form-check-inline">
+        <label class="btn btn-outline-primary">
+          <input
+            type="radio"
+            // className="btn-check"
+            name={`answers[${question["qitemNo"]}]`}
+            id={`answers[${question["qitemNo"]}]`}
+            value={question["answerScore0" + i]}
+            onChange={(e) => {
+              if (typeof handleChange === "function") {
+                setSelectValue(e.target.value);
+                console.log(selectValue);
+                handleChange(question["qitemNo"], question["answerScore0" + i]);
+              }
+            }}
+          />
+          {question["answer0" + i]}
+        </label>
+      </div>
     );
   }
 
@@ -36,15 +50,16 @@ const Card = ({ question, onSelect }) => {
     <div
       claseName="container"
       style={{
-        margin: 14,
-        backgroundColor: 'pink',
-        display: 'block',
-        width: '100%',
-        justifyContent: 'center',
+        margin: "14 0",
+        display: "block",
+        width: "100%",
+        justifyContent: "center",
+        border: "1px solid black",
+        borderRadius: "5px",
       }}
     >
       <div claseName="question">
-        {qestStr.split('<br/>').map((line) => {
+        {qestStr.split("<br/>").map((line) => {
           return (
             <h3>
               {line}
@@ -53,7 +68,13 @@ const Card = ({ question, onSelect }) => {
           );
         })}
       </div>
-      <div className="answer">{answer}</div>
+      <div
+        className="answer justify-center"
+        role="group"
+        aria-label="Basic radio toggle button group"
+      >
+        {answer}
+      </div>
     </div>
   );
 };

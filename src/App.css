@@ -91,3 +91,21 @@ button {
   width: 200px;
   height: 100px;
 }
+
+div .app-container {
+  display: flex;
+  justify-content: center;
+}
+
+div .gender {
+  margin: 10px;
+}
+
+.justify-content {
+  display: flex;
+  justify-content: center;
+}
+
+label {
+  margin-right: 10px;
+}
