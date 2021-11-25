@@ -22,8 +22,6 @@ export const qestnrSeqList = [];
 qestnrSeqMap.forEach((key, value) => {
   qestnrSeqList.push([key, value]);
 });
-console.log(qestnrSeqMap);
-console.log(qestnrSeqList);
 export const trgetSe = new Map();
 trgetSe.set("초등학생", "100205");
 trgetSe.set("중학생", "100206");

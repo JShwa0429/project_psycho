@@ -1,6 +1,6 @@
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
-import UserInput from "./PsychoTest/PsychoTest";
+import PsychoTest from "./PsychoTest/PsychoTest";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         </div>
 
         <div className="app-container">
-          <UserInput />
+          <PsychoTest />
         </div>
         <div className="footer"></div>
       </div>

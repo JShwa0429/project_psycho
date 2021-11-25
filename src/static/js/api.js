@@ -2,7 +2,7 @@
 // const cheerio = require('cheerio');
 // let url = 'https://www.career.go.kr/inspct/web/psycho/vocation/report?seq=NTU1MTMwMDI';
 
-import axios from 'axios';
+import axios from "axios";
 
 // axios.get(url)
 //     .then(html => {
@@ -21,21 +21,23 @@ import axios from 'axios';
 
 // console.log("End of Main Program");
 
-function Api() {
-  this.key = 'a4c80b03ef9a8b8df73cf7b36775257c';
+class Api {
+  constructor() {
+    this.key = "a4c80b03ef9a8b8df73cf7b36775257c";
+  }
 
-  this.getQuestions = async function (seq) {
+  async getQuestion(seq) {
     let result = [];
     const url = `https://www.career.go.kr/inspct/openapi/test/questions?apikey=${this.key}&q=${seq}`;
     await axios
       .get(url)
       .then((res) => {
-        result = res.data['RESULT'];
-        console.log(result);
+        result = res.data["RESULT"];
       })
       .catch((err) => console.error(err));
     return result;
-  };
+  }
 }
 
-export default Api;
+const api = new Api();
+export default api;

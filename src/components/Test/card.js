@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-
 const Card = ({ question, onSelect }) => {
-  const handleChange = (qitemNo, answerScore) => {
-    onSelect(qitemNo, answerScore);
+  const handleChange = (index, qitemNo, answerScore) => {
+    onSelect(index, qitemNo, answerScore);
   };
-  const [selectValue, setSelectValue] = useState(null);
+  // const [selectValue, setSelectValue] = useState(null);
 
   const qestStr = `문제${question["qitemNo"]}. ${question["question"]}`;
   qestStr.split("<br/>").map((line) => {
@@ -28,14 +26,14 @@ const Card = ({ question, onSelect }) => {
           <input
             type="radio"
             // className="btn-check"
-            name={`answers[${question["qitemNo"]}]`}
-            id={`answers[${question["qitemNo"]}]`}
-            value={question["answerScore0" + i]}
+            name={`${question["qitemNo"]}`}
+            id={`${question["qitemNo"]}`}
+            value={`${question["answerScore0" + i]}`}
             onChange={(e) => {
               if (typeof handleChange === "function") {
-                setSelectValue(e.target.value);
-                console.log(selectValue);
-                handleChange(question["qitemNo"], question["answerScore0" + i]);
+                // setSelectValue(e.target.value);
+                // console.log(selectValue);
+                handleChange(i, e.target.id, e.target.value);
               }
             }}
           />

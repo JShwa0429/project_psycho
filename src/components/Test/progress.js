@@ -3,20 +3,16 @@ import Card from "./card";
 import { ProgressBar } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
-const Example = ({ questions, progressPercentage, onMove }) => {
+const Progress = ({ questions, progressPercentage, onMove }) => {
   const [selected, setSelected] = useState(undefined);
   const [selectedAnswer, setSelectedAnswer] = useState({});
+  const len = questions.length;
 
-  const progress = useMemo(
-    (questions) => {
-      return selectedAnswer
-        ? (Object.keys(selectedAnswer).length /
-            (Array.isArray(questions) ? Object.keys(questions).length : 1)) *
-            100
-        : 0;
-    },
-    [selectedAnswer]
-  );
+  const progress = useMemo(() => {
+    return selectedAnswer
+      ? (Object.keys(selectedAnswer).length / len) * 100
+      : 0;
+  }, [selectedAnswer, len]);
 
   const handleSelect = (i, qitemNo, answerScore) => {
     //    i 는 답변의 번호
@@ -29,7 +25,7 @@ const Example = ({ questions, progressPercentage, onMove }) => {
       return newSelectedAnswer;
     });
     console.log(selectedAnswer);
-    console.log(typeof questions);
+    console.log(questions.length);
     console.log(i, qitemNo, answerScore);
   };
 
@@ -39,15 +35,18 @@ const Example = ({ questions, progressPercentage, onMove }) => {
         <div className="mb-4">
           <div className="row justify-content-between">
             <div className="col col-auto">
-              <h2>검사 예시</h2>
+              <h2>검사 진행</h2>
             </div>
             <div className="col col-auto">
-              <h3>{Number(progress)}%</h3>
+              <h3>{Math.round(progress)}%</h3>
             </div>
           </div>
           <ProgressBar percentage={Number(progress)} />
         </div>
-        {questions && <Card question={questions} onSelect={handleSelect} />}
+        {questions &&
+          questions.map((question) => {
+            return <Card question={question} onSelect={handleSelect} />;
+          })}
       </div>
       <div className="text-center justify-content">
         <Button id="prev" onClick={onMove}>
@@ -55,11 +54,11 @@ const Example = ({ questions, progressPercentage, onMove }) => {
         </Button>
 
         <Button id="next" onClick={onMove} disabled={!selected}>
-          검사 시작
+          다음으로
         </Button>
       </div>
     </div>
   );
 };
 
-export default Example;
+export default Progress;

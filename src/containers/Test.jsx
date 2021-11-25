@@ -1,12 +1,9 @@
 import { connect } from "react-redux";
 import Test from "../components/Test/Test";
 
-const MapReduxStateToReactProps = (state) => {
+function MapReduxStateToReactProps(state) {
   return { user: state.user };
-};
-const MapReduxDispatchToReactProps = (dispatch) => {};
+}
+// const MapReduxDispatchToReactProps = (dispatch) => {};
 
-export default connect(
-  MapReduxStateToReactProps,
-  MapReduxDispatchToReactProps
-)(Test);
+export default connect(MapReduxStateToReactProps, null)(Test);

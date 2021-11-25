@@ -4,7 +4,7 @@ import Home from "../containers/Home.jsx";
 import Test from "../containers/Test.jsx";
 
 import Result from "../components/Result/result.jsx";
-export default function UserInput() {
+export default function PsychoTest() {
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Route exact path="/" component={Home} />
