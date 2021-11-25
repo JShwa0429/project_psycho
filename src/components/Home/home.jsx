@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router";
-import Qestnr from "./seq";
+import Seq from "./seq";
 
 // 구현 ----------------------------------------
 // - 이름을 입력할 수 있는 input form을 구현합니다.
@@ -47,7 +47,7 @@ const Home = ({ onClick }) => {
       <form onSubmit={handleSubmit}>
         <h1>직업가치관검사</h1>
         <div className="name" style={{ padding: "10px" }}>
-          <label class="name">이름</label>
+          <label className="name">이름</label>
           <input
             type="text"
             value={name}
@@ -59,34 +59,34 @@ const Home = ({ onClick }) => {
 
         <div className="qestnrSeq justify-content">
           <label>구분</label>
-          <Qestnr onSelect={(seq) => setSeq(seq)} seq={seq} />
+          <Seq onSelect={(seq) => setSeq(seq)} seq={seq} />
         </div>
 
         <div
-          class="gender justify-content"
+          className="gender justify-content"
           role="group"
           aria-label="Basic radio toggle button group"
         >
           <label>성별</label>
           <input
             type="radio"
-            class="btn-check"
+            className="btn-check"
             name="gender"
             id="radio_man"
             onClick={handleClick}
           />
-          <label class="btn btn-outline-primary" for="radio_man">
+          <label className="btn btn-outline-primary" for="radio_man">
             남자
           </label>
 
           <input
             type="radio"
-            class="btn-check"
+            className="btn-check"
             name="gender"
             id="radio_woman"
             onClick={handleClick}
           />
-          <label class="btn btn-outline-primary" for="radio_woman">
+          <label className="btn btn-outline-primary" for="radio_woman">
             여자
           </label>
         </div>

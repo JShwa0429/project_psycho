@@ -1,10 +1,9 @@
 import React, { useMemo, useState } from "react";
-import Card from "./card";
+import Card from "../../containers/Card";
 import { ProgressBar } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
-const Example = ({ questions, progressPercentage, onMove }) => {
-  const [selected, setSelected] = useState(undefined);
+const Example = ({ questions, onMove }) => {
   const [selectedAnswer, setSelectedAnswer] = useState({});
 
   const progress = useMemo(
@@ -18,19 +17,17 @@ const Example = ({ questions, progressPercentage, onMove }) => {
     [selectedAnswer]
   );
 
-  const handleSelect = (i, qitemNo, answerScore) => {
+  const handleSelect = (i, qitemNo) => {
     //    i 는 답변의 번호
     // qitemNo 는 문제 번호
     // score 는 해당 답변의 점수
-    setSelected(i);
     setSelectedAnswer((current) => {
       let newSelectedAnswer = { ...current };
-      newSelectedAnswer[qitemNo] = [i, answerScore];
+      newSelectedAnswer[qitemNo] = i;
       return newSelectedAnswer;
     });
     console.log(selectedAnswer);
-    console.log(typeof questions);
-    console.log(i, qitemNo, answerScore);
+    console.log(i, qitemNo);
   };
 
   return (
@@ -47,14 +44,19 @@ const Example = ({ questions, progressPercentage, onMove }) => {
           </div>
           <ProgressBar percentage={Number(progress)} />
         </div>
-        {questions && <Card question={questions} onSelect={handleSelect} />}
+        {questions && (
+          <Card
+            question={Object.assign({}, questions, { qitemNo: "예시" })}
+            onSelect={handleSelect}
+          />
+        )}
       </div>
       <div className="text-center justify-content">
         <Button id="prev" onClick={onMove}>
           이전으로
         </Button>
 
-        <Button id="next" onClick={onMove} disabled={!selected}>
+        <Button id="next" onClick={onMove}>
           검사 시작
         </Button>
       </div>

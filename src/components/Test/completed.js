@@ -1,4 +1,8 @@
-const Completed = () => {
+import Button from "react-bootstrap/Button";
+import { useHistory } from "react-router";
+
+const Completed = ({ onMove }) => {
+  const history = useHistory();
   return (
     <div>
       <div>
@@ -10,7 +14,18 @@ const Completed = () => {
         </p>
       </div>
       <div>
-        <button>결과 보기</button>
+        <button
+          onClick={() => {
+            history.push("/result");
+          }}
+        >
+          결과 보기
+        </button>
+      </div>
+      <div className="text-center justify-content">
+        <Button id="prev" onClick={onMove}>
+          이전으로
+        </Button>
       </div>
     </div>
   );

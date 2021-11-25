@@ -1,16 +1,18 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 // import { ProgressBar } from "react-bootstrap";
 
 import axios from "axios";
 import { useHistory } from "react-router";
 import Example from "./example";
 import Progress from "./progress";
+import Completed from "./completed";
 
-const Test = ({ user }) => {
+const Test = ({ user, onSave, answers }) => {
   const history = useHistory();
-  const progressPercentage = useMemo(() => {}, []);
-  const [currentPageIndex, setCurrentPageIndex] = useState(0);
+  const [currentPageIndex, setCurrentPageIndex] = useState(1);
   const [questions, setQuestions] = useState([]);
+
+  const cut = 5;
 
   useEffect(() => {
     const key = "a4c80b03ef9a8b8df73cf7b36775257c";
@@ -40,7 +42,7 @@ const Test = ({ user }) => {
   };
 
   const handleClickPrev = () => {
-    if (currentPageIndex === 0) {
+    if (currentPageIndex === 1) {
       history.goBack();
     }
     setCurrentPageIndex((current) => {
@@ -60,18 +62,27 @@ const Test = ({ user }) => {
 
   return (
     <div>
-      {currentPageIndex === 0 && (
+      {currentPageIndex === 1 && (
         <div>
           <Example questions={questions[0]} onMove={handleClickMove} />
         </div>
       )}
-      {currentPageIndex > 0 && (
+      {Math.ceil(questions.length / cut) + 1 >= currentPageIndex &&
+        currentPageIndex > 1 && (
+          <div>
+            <Progress
+              answers={answers}
+              onSave={onSave}
+              questions={questions}
+              cut={cut}
+              currentPageIndex={currentPageIndex}
+              onMove={handleClickMove}
+            />
+          </div>
+        )}
+      {currentPageIndex > Math.ceil(questions.length / cut) + 1 && (
         <div>
-          <Progress
-            questions={questions}
-            progressPercentage={progressPercentage}
-            onMove={handleClickMove}
-          />
+          <Completed onMove={handleClickMove} />
         </div>
       )}
     </div>

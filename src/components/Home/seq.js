@@ -3,7 +3,7 @@ import { qestnrSeqList, qestnrSeqMap } from "../../static/js/data";
 import Button from "react-bootstrap/Button";
 // 심리검사변수를 정하는 버튼
 
-const Qestnr = ({ onSelect, seq }) => {
+const Seq = ({ onSelect, seq }) => {
   const seqList = qestnrSeqList;
 
   const [display, setDisplay] = useState(false);
@@ -36,4 +36,4 @@ const Qestnr = ({ onSelect, seq }) => {
   );
 };
 
-export default Qestnr;
+export default Seq;

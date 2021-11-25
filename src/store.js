@@ -1,8 +1,8 @@
 import { createStore } from "redux";
 
 const initState = {
-  user: {},     // 현재 푸는 사용자의 정보
-  progress: {}, // 현재 풀고 있는 문제
+  user: {}, // 현재 푸는 사용자의 정보
+  answers: {},
 };
 
 const reducer = (state = initState, action) => {
@@ -10,9 +10,9 @@ const reducer = (state = initState, action) => {
     case "INIT":
       return initState;
     case "SAVE_USER":
-      return { ...state, user: action.user };
-    case "SAVE_PROGRESS":
-      return { ...state, state: action.progress };
+      return { ...state, user: action.user, answers: {} };
+    case "SAVE_ANSWERS":
+      return { ...state, answers: action.answers };
     default:
       return state;
   }

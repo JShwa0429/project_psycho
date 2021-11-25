@@ -2,8 +2,17 @@ import { connect } from "react-redux";
 import Test from "../components/Test/Test";
 
 function MapReduxStateToReactProps(state) {
-  return { user: state.user };
+  return { user: state.user, answers: state.answers };
 }
-// const MapReduxDispatchToReactProps = (dispatch) => {};
+const MapReduxDispatchToReactProps = (dispatch) => {
+  return {
+    onSave: function (answers) {
+      dispatch({ type: "SAVE_ANSWERS", answers: answers });
+    },
+  };
+};
 
-export default connect(MapReduxStateToReactProps, null)(Test);
+export default connect(
+  MapReduxStateToReactProps,
+  MapReduxDispatchToReactProps
+)(Test);

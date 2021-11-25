@@ -1,12 +1,18 @@
 import React, { useMemo, useState } from "react";
-import Card from "./card";
+import Card from "../../containers/Card";
 import { ProgressBar } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
-const Progress = ({ questions, progressPercentage, onMove }) => {
-  const [selected, setSelected] = useState(undefined);
+const Progress = ({ questions, currentPageIndex, cut, onMove, onSave }) => {
   const [selectedAnswer, setSelectedAnswer] = useState({});
   const len = questions.length;
+
+  const visibleQuestions = useMemo(() => {
+    return questions.slice(
+      (currentPageIndex - 2) * 5,
+      (currentPageIndex - 1) * 5
+    );
+  }, [questions, currentPageIndex]);
 
   const progress = useMemo(() => {
     return selectedAnswer
@@ -14,19 +20,23 @@ const Progress = ({ questions, progressPercentage, onMove }) => {
       : 0;
   }, [selectedAnswer, len]);
 
-  const handleSelect = (i, qitemNo, answerScore) => {
+  const disable = useMemo(() => {
+    return ((cut * (currentPageIndex - 1)) / len) * 100 > progress;
+  }, [cut, len, currentPageIndex, progress]);
+
+  const handleSelect = (i, qitemNo) => {
     //    i 는 답변의 번호
     // qitemNo 는 문제 번호
     // score 는 해당 답변의 점수
-    setSelected(i);
     setSelectedAnswer((current) => {
       let newSelectedAnswer = { ...current };
-      newSelectedAnswer[qitemNo] = [i, answerScore];
+      newSelectedAnswer[qitemNo] = i;
+      onSave(newSelectedAnswer);
       return newSelectedAnswer;
     });
+    console.log(disable);
     console.log(selectedAnswer);
-    console.log(questions.length);
-    console.log(i, qitemNo, answerScore);
+    console.log(i, qitemNo);
   };
 
   return (
@@ -43,17 +53,17 @@ const Progress = ({ questions, progressPercentage, onMove }) => {
           </div>
           <ProgressBar percentage={Number(progress)} />
         </div>
-        {questions &&
-          questions.map((question) => {
-            return <Card question={question} onSelect={handleSelect} />;
-          })}
+
+        {visibleQuestions.map((question) => {
+          return <Card question={question} onSelect={handleSelect} />;
+        })}
       </div>
       <div className="text-center justify-content">
         <Button id="prev" onClick={onMove}>
           이전으로
         </Button>
 
-        <Button id="next" onClick={onMove} disabled={!selected}>
+        <Button id="next" onClick={onMove} disabled={disable}>
           다음으로
         </Button>
       </div>
