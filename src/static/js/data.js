@@ -1,7 +1,7 @@
 export const qestnrSeqMap = new Map([
-  ["4", "직업흥미검사(K) – 중학생"],
+  ["4", "직업흥미검사(K) – 중학생", "100205"],
   ["5", "직업흥미검사(K) – 고등학생"],
-  ["6", "직업가치관검사 - 일반,대학생", 6],
+  ["6", "직업가치관검사 - 일반,대학생"],
   ["8", "진로개발준비도검사"],
   ["9", "이공계전공적합도검사"],
   ["10", "주요능력효능감검사"],
@@ -22,7 +22,8 @@ export const qestnrSeqList = [];
 qestnrSeqMap.forEach((key, value) => {
   qestnrSeqList.push([key, value]);
 });
-
+console.log(qestnrSeqMap);
+console.log(qestnrSeqList);
 export const trgetSe = new Map();
 trgetSe.set("초등학생", "100205");
 trgetSe.set("중학생", "100206");
@@ -33,6 +34,7 @@ trgetSe.set("일반(학부모)", "100210");
 trgetSe.set("교사", "100214");
 trgetSe.set("교사(상담)", "100215");
 
-export const gender = {};
-gender["100205"] = "남자";
-gender["100206"] = "여자";
+export const gender = {
+  100205: "남자",
+  100206: "여자",
+};

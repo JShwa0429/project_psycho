@@ -1,8 +1,9 @@
 import React from "react";
 import { Route } from "react-router";
-import Home from "../components/home";
-import Test from "../components/test";
-import Result from "../components/result";
+import Home from "../containers/Home.jsx";
+import Test from "../containers/Test.jsx";
+
+import Result from "../components/Result/result.jsx";
 export default function UserInput() {
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>

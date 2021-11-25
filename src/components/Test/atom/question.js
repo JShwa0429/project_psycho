@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Card from "./card";
+import Card from "../card";
 
 const Question = (props) => {
   const [loading, setLoading] = useState(true);
@@ -15,8 +15,6 @@ const Question = (props) => {
       )
       .then((res) => res.data["RESULT"])
       .then((result) => {
-        console.log(result);
-        console.log(props.seq);
         setQuestions(result);
         setLoading(false);
       })

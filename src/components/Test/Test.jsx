@@ -1,13 +1,12 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ProgressBar } from "react-bootstrap";
 import Move from "./atom/move";
 import Question from "./atom/question";
-import Card from "./atom/card";
+import Card from "./card";
 import Button from "react-bootstrap/Button";
 
-const Test = ({ location }) => {
-  const userProfile = location.userProfile;
-  const [progressPercentage, setProgressPercentage] = useState(0);
+const Test = ({ history }) => {
+  const progressPercentage = useMemo(() => {}, []);
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
 
   const exampleQuestion = {};
@@ -25,10 +24,13 @@ const Test = ({ location }) => {
   const [answerList, setAnswerList] = useState([]);
 
   const handleClickPrev = () => {
+    if (currentPageIndex === 0) {
+      history.back();
+    }
     setCurrentPageIndex((current) => {
+      console.log(current - 1);
       return current - 1;
     });
-    console.log(currentPageIndex);
   };
 
   const handleSelect = (qitemNo, selectAnswer) => {
@@ -84,10 +86,7 @@ const Test = ({ location }) => {
               <h3>{progressPercentage}%</h3>
             </div>
             <ProgressBar percentage={progressPercentage} />
-            <Question
-              onSelect={handleSelect}
-              seq={userProfile ? userProfile["qestrnSeq"] : "0"}
-            />
+            <Question onSelect={handleSelect} seq={"0"} />
           </div>
           <div className="text-center justify-content">
             <Move next={"/result"} />
