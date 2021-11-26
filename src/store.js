@@ -7,7 +7,7 @@ const initState = {
 
 const reducer = (state = initState, action) => {
   switch (action.type) {
-    case "INIT":
+    case "RE_INIT":
       return initState;
     case "SAVE_USER":
       return { ...state, user: action.user, answers: {} };

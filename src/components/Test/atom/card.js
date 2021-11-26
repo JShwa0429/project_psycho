@@ -7,7 +7,7 @@ const Card = ({ question, onSelect, answers }) => {
   const qestStr = `문제${question["qitemNo"]}. ${question["question"]}`;
   qestStr.split("<br/>").map((line) => {
     return (
-      <span>
+      <span key={line}>
         {line}
         <br />
       </span>
@@ -15,25 +15,21 @@ const Card = ({ question, onSelect, answers }) => {
   });
 
   const answer = [];
-  let count = 1;
   for (let i = 1; i < 11; i++) {
     // 답안은 있는데, 점수가 반영이 안 된 경우 해당 답안을 힌트로 바꾼다
-    if (question["answer0" + i] == null) break;
-    if (question["answerScore0" + i] == null) {
-      question[`tip${count}Score`] = question["answer0" + i];
-      question["answer0" + i] = null;
-      count += 1;
-      break;
-    }
+    if (question["answer0" + i] == null) continue;
+    if (question["answerScore0" + i] == null || question["answer0" + i] == null)
+      continue;
+
+    // 답안을 순서대로 넣는다
     answer.push(
       // <Button onClick={handleClick} value={question["answerScore" + index]}>
       //   {question["answer" + index]}
       // </Button>
 
-      <label class="btn btn-outline-primary">
+      <label className="btn btn-outline-primary">
         <input
           type="radio"
-          // className="btn-check"
           name={`${question["qitemNo"]}`}
           id={`${question["qitemNo"]}`}
           value={`${question["answerScore0" + i]}`}
@@ -66,7 +62,7 @@ const Card = ({ question, onSelect, answers }) => {
       <div claseName="question">
         {qestStr.split("<br/>").map((line) => {
           return (
-            <h3>
+            <h3 key={line}>
               {line}
               <br />
             </h3>
@@ -78,8 +74,12 @@ const Card = ({ question, onSelect, answers }) => {
         role="group"
         aria-label="Basic radio toggle button group"
       >
-        {answer.map((value) => {
-          return <div className="form-check form-check-inline">{value}</div>;
+        {answer.map((value, index = 0) => {
+          return (
+            <div key={value + index++} className="form-check form-check-inline">
+              {value}
+            </div>
+          );
         })}
       </div>
     </div>

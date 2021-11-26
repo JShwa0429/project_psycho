@@ -13,7 +13,6 @@ function App() {
         <div className="app-container">
           <PsychoTest />
         </div>
-        <div className="footer"></div>
       </div>
     </Router>
   );

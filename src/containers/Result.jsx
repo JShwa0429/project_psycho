@@ -7,7 +7,7 @@ function MapReduxStateToReactProps(state) {
 const MapReduxDispatchToReactProps = (dispatch) => {
   return {
     onInit: function () {
-      dispatch({ type: "INIT" });
+      dispatch({ type: "RE_INIT" });
     },
   };
 };

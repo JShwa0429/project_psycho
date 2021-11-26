@@ -20,13 +20,15 @@ const Seq = ({ onSelect, seq }) => {
 
   return (
     <div className="qestnr">
-      <Button onClick={handleOpen}>
-        {seq > 0 ? qestnrSeqMap.get(seq) : "선택해주세요"}
-      </Button>
+      {!display && (
+        <Button onClick={handleOpen}>
+          {seq > 0 ? qestnrSeqMap.get(seq) : "선택해주세요"}
+        </Button>
+      )}
       {display && (
         <ul>
           {seqList.map((value) => (
-            <Button onClick={handleClick} value={value[1]}>
+            <Button key={value[0]} onClick={handleClick} value={value[1]}>
               {value[0]}
             </Button>
           ))}

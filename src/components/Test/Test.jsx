@@ -7,13 +7,14 @@ import Example from "./example";
 import Progress from "./progress";
 import Completed from "./completed";
 
-const Test = ({ user, onSave, answers }) => {
+const Test = ({ user, onSave }) => {
   const history = useHistory();
   const [currentPageIndex, setCurrentPageIndex] = useState(1);
   const [questions, setQuestions] = useState([]);
 
-  const cut = 5;
+  const cut = 5; // page 나누는 기준
 
+  // 문제 GET API
   useEffect(() => {
     const key = "a4c80b03ef9a8b8df73cf7b36775257c";
     let result = [];
@@ -27,51 +28,39 @@ const Test = ({ user, onSave, answers }) => {
       .catch((err) => console.error(err));
   }, [user]);
 
+  // 이전으로 가기, 다음으로 가기
   const handleClickMove = (e) => {
     if (e.target.id === "next") {
-      handleClickNext();
+      setCurrentPageIndex((current) => {
+        return current + 1;
+      });
     } else if (e.target.id === "prev") {
-      handleClickPrev();
+      if (currentPageIndex === 1) {
+        history.goBack();
+      }
+      setCurrentPageIndex((current) => {
+        return current - 1;
+      });
     }
   };
-  const handleClickNext = () => {
-    setCurrentPageIndex((current) => {
-      return current + 1;
-    });
-    console.log(currentPageIndex);
-  };
-
-  const handleClickPrev = () => {
-    if (currentPageIndex === 1) {
-      history.goBack();
-    }
-    setCurrentPageIndex((current) => {
-      return current - 1;
-    });
-    console.log(currentPageIndex);
-  };
-
-  // const handleSelect = (qitemNo, selectAnswer) => {
-  //   console.log(qitemNo, selectAnswer);
-  //   setAnswerList((current) => {
-  //     let newAnswerList = [...current];
-  //     newAnswerList[qitemNo] = selectAnswer;
-  //     return newAnswerList;
-  //   });
-  // };
 
   return (
     <div>
+      {/* PAGE 번호 1 일 때는 첫 문제를 예시로 보여준다 */}
       {currentPageIndex === 1 && (
         <div>
-          <Example questions={questions[0]} onMove={handleClickMove} />
+          <Example
+            questions={questions[0]}
+            onMove={handleClickMove}
+            onSave={onSave}
+          />
         </div>
       )}
+      {/* 문제가 남아있는 경우 보여줄 PROGRESS */}
       {Math.ceil(questions.length / cut) + 1 >= currentPageIndex &&
         currentPageIndex > 1 && (
           <div>
             <Progress
-              answers={answers}
               onSave={onSave}
               questions={questions}
               cut={cut}
@@ -80,9 +69,10 @@ const Test = ({ user, onSave, answers }) => {
             />
           </div>
         )}
+      {/* 문제가 더 이상 없을 때 보여줄 결과 완료 창 */}
       {currentPageIndex > Math.ceil(questions.length / cut) + 1 && (
         <div>
-          <Completed onMove={handleClickMove} />
+          <Completed seq={user.seq} />
         </div>
       )}
     </div>

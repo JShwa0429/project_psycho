@@ -3,16 +3,18 @@ import Card from "../../containers/Card";
 import { ProgressBar } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
-const Example = ({ questions, onMove }) => {
+const Example = ({ questions, onMove, onSave }) => {
   const [selectedAnswer, setSelectedAnswer] = useState({});
 
-  const progress = useMemo(
+  const progressPercentage = useMemo(
     (questions) => {
-      return selectedAnswer
-        ? (Object.keys(selectedAnswer).length /
-            (Array.isArray(questions) ? Object.keys(questions).length : 1)) *
-            100
-        : 0;
+      return parseInt(
+        selectedAnswer
+          ? (Object.keys(selectedAnswer).length /
+              (Array.isArray(questions) ? Object.keys(questions).length : 1)) *
+              100
+          : 0
+      );
     },
     [selectedAnswer]
   );
@@ -24,10 +26,9 @@ const Example = ({ questions, onMove }) => {
     setSelectedAnswer((current) => {
       let newSelectedAnswer = { ...current };
       newSelectedAnswer[qitemNo] = i;
+      onSave(newSelectedAnswer);
       return newSelectedAnswer;
     });
-    console.log(selectedAnswer);
-    console.log(i, qitemNo);
   };
 
   return (
@@ -39,14 +40,14 @@ const Example = ({ questions, onMove }) => {
               <h2>검사 예시</h2>
             </div>
             <div className="col col-auto">
-              <h3>{Number(progress)}%</h3>
+              <h3>{progressPercentage}%</h3>
             </div>
           </div>
-          <ProgressBar percentage={Number(progress)} />
+          <ProgressBar now={progressPercentage} />
         </div>
         {questions && (
           <Card
-            question={Object.assign({}, questions, { qitemNo: "예시" })}
+            question={Object.assign({}, questions, { qitemNo: "0" })}
             onSelect={handleSelect}
           />
         )}

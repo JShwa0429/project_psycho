@@ -6,6 +6,9 @@ function mapReduxDispatchToReactProps(dispatch) {
     onClick: function (user) {
       dispatch({ type: "SAVE_USER", user: user });
     },
+    onInit: function () {
+      dispatch({ type: "INIT" });
+    },
   };
 }
 

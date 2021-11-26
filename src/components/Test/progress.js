@@ -14,15 +14,18 @@ const Progress = ({ questions, currentPageIndex, cut, onMove, onSave }) => {
     );
   }, [questions, currentPageIndex]);
 
-  const progress = useMemo(() => {
+  const progressPercentage = useMemo(() => {
     return selectedAnswer
       ? (Object.keys(selectedAnswer).length / len) * 100
       : 0;
   }, [selectedAnswer, len]);
 
   const disable = useMemo(() => {
-    return ((cut * (currentPageIndex - 1)) / len) * 100 > progress;
-  }, [cut, len, currentPageIndex, progress]);
+    return (
+      ((cut * (currentPageIndex - 1)) / len) * 100 > progressPercentage &&
+      progressPercentage !== 100
+    );
+  }, [cut, len, currentPageIndex, progressPercentage]);
 
   const handleSelect = (i, qitemNo) => {
     //    i 는 답변의 번호
@@ -34,9 +37,6 @@ const Progress = ({ questions, currentPageIndex, cut, onMove, onSave }) => {
       onSave(newSelectedAnswer);
       return newSelectedAnswer;
     });
-    console.log(disable);
-    console.log(selectedAnswer);
-    console.log(i, qitemNo);
   };
 
   return (
@@ -48,14 +48,20 @@ const Progress = ({ questions, currentPageIndex, cut, onMove, onSave }) => {
               <h2>검사 진행</h2>
             </div>
             <div className="col col-auto">
-              <h3>{Math.round(progress)}%</h3>
+              <h3>{Math.round(progressPercentage)}%</h3>
             </div>
           </div>
-          <ProgressBar percentage={Number(progress)} />
+          <ProgressBar now={progressPercentage} />
         </div>
 
-        {visibleQuestions.map((question) => {
-          return <Card question={question} onSelect={handleSelect} />;
+        {visibleQuestions.map((question, index = 0) => {
+          return (
+            <Card
+              key={question + index++}
+              question={question}
+              onSelect={handleSelect}
+            />
+          );
         })}
       </div>
       <div className="text-center justify-content">

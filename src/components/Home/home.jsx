@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router";
-import Seq from "./seq";
+// import Seq from "./seq";
 
 // 구현 ----------------------------------------
 // - 이름을 입력할 수 있는 input form을 구현합니다.
@@ -16,8 +16,9 @@ import Seq from "./seq";
 const Home = ({ onClick }) => {
   const [name, setName] = useState("");
   const [selectedGender, setSelectedGender] = useState(null);
-  const [seq, setSeq] = useState(0);
+  const seq = 6;
   const history = useHistory();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const timestamp = +new Date();
@@ -34,12 +35,7 @@ const Home = ({ onClick }) => {
   };
 
   const handleClick = (e) => {
-    const id = e.target.id;
-    if (id === "radio_man") {
-      setSelectedGender("남자");
-    } else if (id === "radio_woman") {
-      setSelectedGender("여자");
-    }
+    setSelectedGender(e.target.id);
   };
 
   return (
@@ -57,10 +53,14 @@ const Home = ({ onClick }) => {
           ></input>
         </div>
 
-        <div className="qestnrSeq justify-content">
-          <label>구분</label>
-          <Seq onSelect={(seq) => setSeq(seq)} seq={seq} />
-        </div>
+        {/* <div className="qestnrSeq justify-content">
+          <p>
+            <label>구분</label>
+          </p>
+          <div>
+            <Seq onSelect={(seq) => setSeq(seq)} seq={seq} />
+          </div>
+        </div> */}
 
         <div
           className="gender justify-content"
@@ -72,10 +72,10 @@ const Home = ({ onClick }) => {
             type="radio"
             className="btn-check"
             name="gender"
-            id="radio_man"
+            id="100205"
             onClick={handleClick}
           />
-          <label className="btn btn-outline-primary" for="radio_man">
+          <label className="btn btn-outline-primary" htmlFor="100205">
             남자
           </label>
 
@@ -83,16 +83,16 @@ const Home = ({ onClick }) => {
             type="radio"
             className="btn-check"
             name="gender"
-            id="radio_woman"
+            id="100206"
             onClick={handleClick}
           />
-          <label className="btn btn-outline-primary" for="radio_woman">
+          <label className="btn btn-outline-primary" htmlFor="100206">
             여자
           </label>
         </div>
 
         <div className="btn justify-content">
-          {name && selectedGender && seq > 0 ? (
+          {name && selectedGender > 0 ? (
             <Button type="submit">검사 시작</Button>
           ) : (
             <Button type="submit" disabled>
