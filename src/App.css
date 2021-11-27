@@ -6,7 +6,7 @@
 * {
   margin: 0vh;
   padding: 0vh;
-  font-size: 18x;
+  font-size: 1em;
 }
 
 div .gender {
@@ -50,14 +50,14 @@ div .home-introduce-img {
   width: 100%;
   height: 20%;
   display: table-row;
-  font-size: 3rem;
+  font-size: 2em;
 }
 
 div .home-introduce-content {
   width: 100%;
   height: 40%;
   display: table-row;
-  font-size: 1.8rem;
+  font-size: 1.5em;
   color: black;
 }
 
@@ -126,14 +126,15 @@ img {
 }
 
 .completed img {
-  width: 40%;
-  height: auto;
+  width: auto;
+  height: 30vh;
   margin: 5vh 30%;
 }
 
 .completed {
   text-align: center;
-  height: 100vh;
+  height: auto;
+  width: auto;
   padding: 5vh 0;
 }
 

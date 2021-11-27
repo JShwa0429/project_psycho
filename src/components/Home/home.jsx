@@ -56,7 +56,7 @@ const Home = ({ onClick }) => {
           <Form.Floating
             className="Form mb-3"
             onSubmit={handleSubmit}
-            style={{ fontSize: "1.8rem" }}
+            style={{ fontSize: "3vh" }}
           >
             <FloatingLabel
               controlId="floatingInput"
@@ -68,7 +68,7 @@ const Home = ({ onClick }) => {
                 style={{
                   width: "90%",
                   height: "8vh",
-                  fontSize: "2rem",
+                  fontSize: "3vh",
                   textAlign: "center",
                 }}
                 type="text"
@@ -96,7 +96,7 @@ const Home = ({ onClick }) => {
                 htmlFor="100205"
                 style={{
                   width: "40%",
-                  fontSize: "2rem",
+                  fontSize: "1em",
                   paddingTop: "1.3vh",
                   marginRight: "0vh",
                   color: "skyblue",
@@ -118,7 +118,7 @@ const Home = ({ onClick }) => {
                 style={{
                   marginLeft: "2vh",
                   width: "40%",
-                  fontSize: "2rem",
+                  fontSize: "1em",
                   paddingTop: "1.3vh",
                   color: "skyblue",
                   border: "1px solid skyblue",
@@ -137,7 +137,7 @@ const Home = ({ onClick }) => {
                 style={{
                   marginLeft: "2vh",
                   width: "100%",
-                  fontSize: "2rem",
+                  fontSize: "5vh",
                   paddingTop: "1vh",
                 }}
                 disabled={!(name && selectedGender)}

@@ -79,13 +79,19 @@ const Progress = ({
       </div>
 
       <div className="btn-move">
-        <Button variant="secondary" size="lg" id="prev" onClick={onMove}>
+        <Button
+          variant="secondary"
+          style={{ float: "left", fontSize: "2em" }}
+          size="lg"
+          id="prev"
+          onClick={onMove}
+        >
           이전으로
         </Button>
 
         <Button
           size="lg"
-          style={{ float: "right" }}
+          style={{ float: "right", fontSize: "2em" }}
           id="next"
           onClick={onMove}
           disabled={disable}

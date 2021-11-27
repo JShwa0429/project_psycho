@@ -52,7 +52,7 @@ const Question = ({ question, onSelect, answers }) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            fontSize: "1.8rem",
+            fontSize: "2vw",
           }}
           htmlFor={`${question["qitemNo"]}-${i}`}
         >

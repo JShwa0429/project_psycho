@@ -300,8 +300,7 @@ const Result = ({ user, answers, onInit }) => {
       <div
         style={{
           width: "100%",
-          height: "20vh",
-          margin: "0",
+          height: "auto",
           display: "flex",
           justifyContent: "center",
         }}
@@ -311,9 +310,7 @@ const Result = ({ user, answers, onInit }) => {
           to="/"
           onClick={() => onInit()}
           style={{
-            width: "50%",
-            height: "50%",
-            fontSize: "3rem",
+            fontSize: "2em",
           }}
         >
           다시 검사하기

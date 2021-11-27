@@ -4,13 +4,13 @@ const Completed = () => {
     <div className="completed mb-2">
       <img src="img/solved.png" alt="검사완료" />
       <h1 className="text-primary mb-4">검사가 완료되었습니다.</h1>
-      <h4>
+      <p style={{ fontSize: "1em" }}>
         검사결과는 여러분이 직업을 선택할 때
         <br />
         상대적으로 어떠한 가치를 중요하게 생각하는지를 알려주고
         <br />
         중요 가치를 충족시켜줄 수 있는 직업에 대해 생각해 볼 기회를 제공합니다.
-      </h4>
+      </p>
       <br />
       <br />
       <br />
@@ -29,7 +29,7 @@ const Completed = () => {
           style={{
             width: "50%",
             height: "50%",
-            fontSize: "3rem",
+            fontSize: "5vh",
           }}
         >
           결과 보기

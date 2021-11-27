@@ -83,6 +83,7 @@ const Chart = ({ data }) => {
                       position: "absolute",
                       top: "100%",
                       width: "100%",
+                      fontSize: "1vw",
                       paddingTop: 8,
                     }}
                   >
