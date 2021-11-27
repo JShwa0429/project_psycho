@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import axios from "axios";
 import { useHistory } from "react-router";
-import Example from "./example";
+// import Example from "./example";
 import Progress from "./progress";
 import Completed from "./completed";
 
@@ -11,7 +11,7 @@ const Test = ({ user, onSave }) => {
   const history = useHistory();
   const [currentPageIndex, setCurrentPageIndex] = useState(1);
   const [questions, setQuestions] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   const cut = 5; // page 나누는 기준
 
   // 문제 GET API
@@ -24,6 +24,7 @@ const Test = ({ user, onSave }) => {
       .then((res) => {
         result = res.data["RESULT"];
         setQuestions(result);
+        setLoading(false);
       })
       .catch((err) => console.error(err));
   }, [user]);
@@ -43,14 +44,18 @@ const Test = ({ user, onSave }) => {
       });
     }
   };
+  if (loading) return <div>로딩중...</div>;
 
   return (
     <div>
       {/* PAGE 번호 1 일 때는 첫 문제를 예시로 보여준다 */}
       {currentPageIndex === 1 && (
         <div>
-          <Example
-            questions={questions[0]}
+          <Progress
+            testState="검사예시"
+            questions={[Object.assign({}, questions[0], { qitemNo: 0 })]}
+            cut={cut}
+            currentPageIndex={currentPageIndex}
             onMove={handleClickMove}
             onSave={onSave}
           />
@@ -61,6 +66,7 @@ const Test = ({ user, onSave }) => {
         currentPageIndex > 1 && (
           <div>
             <Progress
+              testState="검사진행"
               onSave={onSave}
               questions={questions}
               cut={cut}

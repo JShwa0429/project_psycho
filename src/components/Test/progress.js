@@ -3,20 +3,27 @@ import Card from "../../containers/Card";
 import { ProgressBar } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
-const Progress = ({ questions, currentPageIndex, cut, onMove, onSave }) => {
-  const [selectedAnswer, setSelectedAnswer] = useState({});
+const Progress = ({
+  questions,
+  currentPageIndex,
+  cut,
+  onMove,
+  onSave,
+  testState,
+}) => {
+  const [selectedAnswer, setSelectedAnswer] = useState([{}, {}]);
+
   const len = questions.length;
 
   const visibleQuestions = useMemo(() => {
-    return questions.slice(
-      (currentPageIndex - 2) * 5,
-      (currentPageIndex - 1) * 5
-    );
+    return questions.length > 1
+      ? questions.slice((currentPageIndex - 2) * 5, (currentPageIndex - 1) * 5)
+      : questions;
   }, [questions, currentPageIndex]);
 
   const progressPercentage = useMemo(() => {
     return selectedAnswer
-      ? (Object.keys(selectedAnswer).length / len) * 100
+      ? (Object.keys(selectedAnswer[0]).length / len) * 100
       : 0;
   }, [selectedAnswer, len]);
 
@@ -27,13 +34,14 @@ const Progress = ({ questions, currentPageIndex, cut, onMove, onSave }) => {
     );
   }, [cut, len, currentPageIndex, progressPercentage]);
 
-  const handleSelect = (i, qitemNo) => {
+  const handleSelect = (i, qitemNo, score) => {
     //    i 는 답변의 번호
     // qitemNo 는 문제 번호
     // score 는 해당 답변의 점수
     setSelectedAnswer((current) => {
       let newSelectedAnswer = { ...current };
-      newSelectedAnswer[qitemNo] = i;
+      newSelectedAnswer[0][qitemNo] = i;
+      newSelectedAnswer[1]["B" + qitemNo] = score;
       onSave(newSelectedAnswer);
       return newSelectedAnswer;
     });
@@ -45,7 +53,7 @@ const Progress = ({ questions, currentPageIndex, cut, onMove, onSave }) => {
         <div className="mb-4">
           <div className="row justify-content-between">
             <div className="col col-auto">
-              <h2>검사 진행</h2>
+              <h2>{testState}</h2>
             </div>
             <div className="col col-auto">
               <h3>{Math.round(progressPercentage)}%</h3>

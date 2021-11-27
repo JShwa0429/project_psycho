@@ -7,7 +7,10 @@ function MapReduxStateToReactProps(state) {
 const MapReduxDispatchToReactProps = (dispatch) => {
   return {
     onSave: function (answers) {
-      dispatch({ type: "SAVE_ANSWERS", answers: answers });
+      dispatch({
+        type: "SAVE_ANSWERS",
+        answers: { index: answers[0], score: answers[1] },
+      });
     },
   };
 };

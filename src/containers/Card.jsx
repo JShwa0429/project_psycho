@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Card from "../components/Test/atom/card";
+import Card from "../components/Test/card";
 
 function MapReduxStateToReactProps(state) {
   return { answers: state.answers };

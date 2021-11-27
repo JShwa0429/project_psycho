@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { interpretationNames } from "utils/constants";
+import { interpretationNames } from "../../static/js/data";
 
 const Chart = ({ data }) => {
   const maxScore = useMemo(() => {

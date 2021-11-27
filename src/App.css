@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  width: 80%;
+}
+
+* {
+  margin: 0vh;
+  padding: 0vh;
 }
 
 .App-header {
@@ -50,19 +56,6 @@ tr:nth-child(even) {
 
 td {
   padding: 5px;
-}
-
-button {
-  background-color: aqua;
-
-  font-size: large;
-  width: 200px;
-  height: 100px;
-}
-
-div .app-container {
-  display: flex;
-  justify-content: center;
 }
 
 div .gender {

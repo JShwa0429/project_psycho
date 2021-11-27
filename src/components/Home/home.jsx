@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router";
-// import Seq from "./seq";
 
 // 구현 ----------------------------------------
 // - 이름을 입력할 수 있는 input form을 구현합니다.
@@ -92,7 +91,7 @@ const Home = ({ onClick }) => {
         </div>
 
         <div className="btn justify-content">
-          {name && selectedGender > 0 ? (
+          {name && selectedGender && seq > 0 ? (
             <Button type="submit">검사 시작</Button>
           ) : (
             <Button type="submit" disabled>

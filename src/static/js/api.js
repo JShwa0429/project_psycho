@@ -1,43 +1,35 @@
-// const axios = require('axios');
-// const cheerio = require('cheerio');
-// let url = 'https://www.career.go.kr/inspct/web/psycho/vocation/report?seq=NTU1MTMwMDI';
+import Axios from "axios";
 
-import axios from "axios";
+const axios = Axios.create({
+  headers: { "Content-Type": "application/json" },
+});
 
-// axios.get(url)
-//     .then(html => {
-//         const $ = cheerio.load(html.data);
-//         let nameArr = [];
-//         $('div.aptitude-tbl-list')
-//             .find('tbody tr')
-//             .find('td')
-//             .text((i,el) => {
-//                 console.log(el)
-//             });
+const api = {};
+// const QUESTION_SEQ = "6";
 
-//         console.log(nameArr);
-//     })
-//     .catch(error=> console.error(error));
-
-// console.log("End of Main Program");
-
-class Api {
-  constructor() {
-    this.key = "a4c80b03ef9a8b8df73cf7b36775257c";
+api.getJobs = async ({ no1, no2 }) => {
+  const res = await axios.get(
+    "https://inspct.career.go.kr/inspct/api/psycho/value/jobs",
+    {
+      params: { no1, no2 },
+    }
+  );
+  if (Array.isArray(res?.data)) {
+    return res.data;
   }
+};
 
-  async getQuestion(seq) {
-    let result = [];
-    const url = `https://www.career.go.kr/inspct/openapi/test/questions?apikey=${this.key}&q=${seq}`;
-    await axios
-      .get(url)
-      .then((res) => {
-        result = res.data["RESULT"];
-      })
-      .catch((err) => console.error(err));
-    return result;
+api.getMajors = async ({ no1, no2 }) => {
+  const res = await axios.get(
+    "https://inspct.career.go.kr/inspct/api/psycho/value/majors",
+    {
+      params: { no1, no2 },
+    }
+  );
+  if (Array.isArray(res?.data)) {
+    return res.data;
   }
-}
+  throw new Error(res?.data?.ERROR_REASON || "");
+};
 
-const api = new Api();
 export default api;
