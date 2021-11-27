@@ -31,6 +31,10 @@ const Test = ({ user, onSave }) => {
 
   // 이전으로 가기, 다음으로 가기
   const handleClickMove = (e) => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     if (e.target.id === "next") {
       setCurrentPageIndex((current) => {
         return current + 1;
@@ -47,7 +51,7 @@ const Test = ({ user, onSave }) => {
   if (loading) return <div>로딩중...</div>;
 
   return (
-    <div>
+    <div className="test">
       {/* PAGE 번호 1 일 때는 첫 문제를 예시로 보여준다 */}
       {currentPageIndex === 1 && (
         <div>

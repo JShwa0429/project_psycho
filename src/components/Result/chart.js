@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { interpretationNames } from "../../static/js/data";
-
 const Chart = ({ data }) => {
   const maxScore = useMemo(() => {
     if (Array.isArray(data)) {
@@ -32,7 +31,7 @@ const Chart = ({ data }) => {
         marginBottom: 48,
       }}
     >
-      <table className="table table-bordered m-0">{rows}</table>
+      <table>{rows}</table>
       <div
         style={{
           position: "absolute",

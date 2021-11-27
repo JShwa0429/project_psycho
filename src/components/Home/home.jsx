@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
+import { FloatingLabel, Form, Button } from "react-bootstrap";
 import { useHistory } from "react-router";
 
 // 구현 ----------------------------------------
@@ -17,7 +17,6 @@ const Home = ({ onClick }) => {
   const [selectedGender, setSelectedGender] = useState(null);
   const seq = 6;
   const history = useHistory();
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const timestamp = +new Date();
@@ -38,68 +37,118 @@ const Home = ({ onClick }) => {
   };
 
   return (
-    <div className="userform">
-      <form onSubmit={handleSubmit}>
-        <h1>직업가치관검사</h1>
-        <div className="name" style={{ padding: "10px" }}>
-          <label className="name">이름</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
-          ></input>
-        </div>
-
-        {/* <div className="qestnrSeq justify-content">
-          <p>
-            <label>구분</label>
-          </p>
-          <div>
-            <Seq onSelect={(seq) => setSeq(seq)} seq={seq} />
+    <div className="home justify-content">
+      <div className="home-left">
+        <div className="home-introduce">
+          <div className="home-introduce-img">
+            <p style={{ color: "#50b8e7" }}>직업가치관검사</p>
           </div>
-        </div> */}
-
-        <div
-          className="gender justify-content"
-          role="group"
-          aria-label="Basic radio toggle button group"
-        >
-          <label>성별</label>
-          <input
-            type="radio"
-            className="btn-check"
-            name="gender"
-            id="100205"
-            onClick={handleClick}
-          />
-          <label className="btn btn-outline-primary" htmlFor="100205">
-            남자
-          </label>
-
-          <input
-            type="radio"
-            className="btn-check"
-            name="gender"
-            id="100206"
-            onClick={handleClick}
-          />
-          <label className="btn btn-outline-primary" htmlFor="100206">
-            여자
-          </label>
+          <div className="home-introduce-content">
+            <p>
+              <b style={{ color: "navy" }}>&#47;* Elice *&#47;</b>에서 자신의
+              가치관을 선택해 어울리는 직업을 알아보세요.
+            </p>
+          </div>
         </div>
-
-        <div className="btn justify-content">
-          {name && selectedGender && seq > 0 ? (
-            <Button type="submit">검사 시작</Button>
-          ) : (
-            <Button type="submit" disabled>
-              검사 시작
-            </Button>
-          )}
+      </div>
+      <div className="home-right">
+        <div className="home-input">
+          <Form.Floating
+            className="Form mb-3"
+            onSubmit={handleSubmit}
+            style={{ fontSize: "1.8rem" }}
+          >
+            <FloatingLabel
+              controlId="floatingInput"
+              label="이름"
+              className="mb-3"
+              style={{ marginLeft: "2.6vw" }}
+            >
+              <Form.Control
+                style={{
+                  width: "90%",
+                  height: "8vh",
+                  fontSize: "2rem",
+                  textAlign: "center",
+                }}
+                type="text"
+                value={name}
+                onChange={(event) => {
+                  setName(event.target.value);
+                }}
+              />
+            </FloatingLabel>
+            <div
+              className="gender"
+              role="group"
+              aria-label="Basic radio toggle button group"
+              style={{ padding: "0px" }}
+            >
+              <input
+                type="radio"
+                className="btn-check"
+                name="gender"
+                id="100205"
+                onClick={handleClick}
+              />
+              <label
+                className="btn "
+                htmlFor="100205"
+                style={{
+                  width: "40%",
+                  fontSize: "2rem",
+                  paddingTop: "1.3vh",
+                  marginRight: "0vh",
+                  color: "skyblue",
+                  border: "1px solid skyblue",
+                }}
+              >
+                남성
+              </label>
+              <input
+                type="radio"
+                className="btn-check"
+                name="gender"
+                id="100206"
+                onClick={handleClick}
+              />
+              <label
+                className="btn"
+                htmlFor="100206"
+                style={{
+                  marginLeft: "2vh",
+                  width: "40%",
+                  fontSize: "2rem",
+                  paddingTop: "1.3vh",
+                  color: "skyblue",
+                  border: "1px solid skyblue",
+                }}
+              >
+                여성
+              </label>
+            </div>
+            <div
+              className="btn justify-content"
+              style={{ float: "right", marginRight: "1vw", marginTop: "2vh" }}
+            >
+              <Button
+                variant="outline-primary"
+                type="submit"
+                style={{
+                  marginLeft: "2vh",
+                  width: "100%",
+                  fontSize: "2rem",
+                  paddingTop: "1vh",
+                }}
+                disabled={!(name && selectedGender)}
+                onClick={handleSubmit}
+              >
+                검사 시작
+              </Button>
+            </div>
+          </Form.Floating>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

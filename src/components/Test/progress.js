@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import Card from "../../containers/Card";
+import Question from "../../containers/Question";
 import { ProgressBar } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
@@ -48,15 +48,18 @@ const Progress = ({
   };
 
   return (
-    <div>
+    <div style={{ marginTop: "5vh" }}>
       <div>
-        <div className="mb-4">
-          <div className="row justify-content-between">
-            <div className="col col-auto">
-              <h2>{testState}</h2>
+        <div className="mb-5">
+          <div
+            className="row justify-content-between"
+            style={{ marginBottom: "2vh" }}
+          >
+            <div className="col col-auto" style={{ marginLeft: "2vw" }}>
+              <h1>{testState}</h1>
             </div>
-            <div className="col col-auto">
-              <h3>{Math.round(progressPercentage)}%</h3>
+            <div className="col col-auto" style={{ marginRight: "2vw" }}>
+              <h1>{Math.round(progressPercentage)}%</h1>
             </div>
           </div>
           <ProgressBar now={progressPercentage} />
@@ -64,20 +67,29 @@ const Progress = ({
 
         {visibleQuestions.map((question, index = 0) => {
           return (
-            <Card
-              key={question + index++}
-              question={question}
-              onSelect={handleSelect}
-            />
+            <div className="question">
+              <Question
+                key={question + index++}
+                question={question}
+                onSelect={handleSelect}
+              />
+            </div>
           );
         })}
       </div>
-      <div className="text-center justify-content">
-        <Button id="prev" onClick={onMove}>
+
+      <div className="btn-move">
+        <Button variant="secondary" size="lg" id="prev" onClick={onMove}>
           이전으로
         </Button>
 
-        <Button id="next" onClick={onMove} disabled={disable}>
+        <Button
+          size="lg"
+          style={{ float: "right" }}
+          id="next"
+          onClick={onMove}
+          disabled={disable}
+        >
           다음으로
         </Button>
       </div>

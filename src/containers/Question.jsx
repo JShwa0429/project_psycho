@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
-import Card from "../components/Test/card";
+import Question from "../components/Test/question";
 
 function MapReduxStateToReactProps(state) {
   return { answers: state.answers };
 }
 
-export default connect(MapReduxStateToReactProps, null)(Card);
+export default connect(MapReduxStateToReactProps, null)(Question);

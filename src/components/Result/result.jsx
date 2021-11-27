@@ -4,6 +4,7 @@ import { useEffect, useState, useMemo, useCallback } from "react";
 import Chart from "./chart";
 import { gender, majorNames, educationLevelNames } from "../../static/js/data";
 import api from "../../static/js/api";
+import { Table } from "react-bootstrap";
 
 const Result = ({ user, answers, onInit }) => {
   const [majors, setMajors] = useState(null);
@@ -158,16 +159,26 @@ const Result = ({ user, answers, onInit }) => {
     fetchMajors();
   }, [fetchMajors]);
   return (
-    <div>
+    <div className="result">
       <div className="text-center mb-4">
-        <h2 className="border-bottom d-inline-block">직업가치관검사 결과표</h2>
+        <h1 className="border-bottom d-inline-block">직업가치관검사 결과표</h1>
       </div>
-      <table className="table">
+      <p>
+        <b>직업가치관</b>이란 직업을 선택할 때 영향을 끼치는 자신만의 믿음과
+        신념입니다. <br />
+        따라서 여러분의 직업생활과 관련하여 포기하지 않는 무게중심의 역할을
+        한다고 볼 수 있습니다. <br />
+        직업가치관검사는 여러분이 직업을 선택할 때 상대적으로 어떠한 가치를
+        중요하게 생각하는지를 알려줍니다. <br />
+        또한 본인이 가장 중요하게 생각하는 가치를 충족시켜줄 수 있는 직업에 대해
+        생각해 볼 기회를 제공합니다.
+      </p>
+      <Table striped bordered hover>
         <thead>
           <tr>
-            <th scope="col">이름</th>
-            <th scope="col">성별</th>
-            <th scope="col">검사일</th>
+            <th>이름</th>
+            <th>성별</th>
+            <th>검사일</th>
           </tr>
         </thead>
         <tbody>
@@ -177,28 +188,30 @@ const Result = ({ user, answers, onInit }) => {
             <td>{reportedDate}</td>
           </tr>
         </tbody>
-      </table>
+      </Table>
       <br />
       <br />
-      <div>
-        <h3>직업가치관결과</h3>
-        <Chart data={reportScores} />
+      <div className="score-chart" style={{ paddingBottom: "3vh" }}>
+        <h2>직업가치관결과</h2>
+        <div style={{ border: "1px solid black" }}>
+          <Chart data={reportScores} />
+        </div>
       </div>
-      <br />
-      <br />
       <div>
-        <h3>가치관과 관련이 높은 직업</h3>
+        <h2>가치관과 관련이 높은 직업</h2>
         <div className="bg-secondary p-2 text-center text-white">
           <h4>종사자 평균 학력별</h4>
         </div>
-        <table className="table">
-          <thread>
+        <Table>
+          <thead>
             <tr>
               <th scope="col" style={{ whiteSpace: "nowrap", minWidth: 120 }}>
                 분야
               </th>
               <th scope="col">직업</th>
             </tr>
+          </thead>
+          <tbody>
             {educationLevelNames.map(
               (educationLevelName, educationLevelIndex) => {
                 const jobsByEducationLevel = (jobs || []).filter((job) => {
@@ -224,7 +237,6 @@ const Result = ({ user, answers, onInit }) => {
                         const [jobSeq, jobName] = job;
                         return (
                           <a
-                            className="mr-2"
                             href={`https://www.career.go.kr/cnet/front/base/job/jobView.do?SEQ=${jobSeq}`}
                             target="_blank"
                             rel="noreferrer"
@@ -238,12 +250,13 @@ const Result = ({ user, answers, onInit }) => {
                 );
               }
             )}
-          </thread>
-        </table>
+          </tbody>
+        </Table>
+
         <div className="bg-secondary p-2 text-center text-white">
           <h4>종사자 평균 전공별</h4>
         </div>
-        <table className="table">
+        <Table>
           <thead>
             <tr>
               <th scope="col" style={{ whiteSpace: "nowrap", minWidth: 120 }}>
@@ -269,7 +282,6 @@ const Result = ({ user, answers, onInit }) => {
                       const [jobSeq, jobName] = job;
                       return (
                         <a
-                          className="mr-2"
                           href={`https://www.career.go.kr/cnet/front/base/job/jobView.do?SEQ=${jobSeq}`}
                           target="_blank"
                           rel="noreferrer"
@@ -283,11 +295,30 @@ const Result = ({ user, answers, onInit }) => {
               );
             })}
           </thead>
-        </table>
+        </Table>
       </div>
-      <Link className="btn btn-outline-primary" to="/" onClick={() => onInit()}>
-        다시 검사하기
-      </Link>
+      <div
+        style={{
+          width: "100%",
+          height: "20vh",
+          margin: "0",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Link
+          className="btn btn-outline-primary"
+          to="/"
+          onClick={() => onInit()}
+          style={{
+            width: "50%",
+            height: "50%",
+            fontSize: "3rem",
+          }}
+        >
+          다시 검사하기
+        </Link>
+      </div>
     </div>
   );
 };

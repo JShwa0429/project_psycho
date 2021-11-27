@@ -1,20 +1,19 @@
-const Card = ({ question, onSelect, answers }) => {
+import { Card } from "react-bootstrap";
+import { useMemo } from "react";
+const Question = ({ question, onSelect, answers }) => {
   const handleChange = (index, qitemNo, score) => {
     onSelect(index, qitemNo, score);
   };
   // const [selectValue, setSelectValue] = useState(null);
 
-  const qestStr = `문제${question["qitemNo"]}. ${question["question"]}`;
-  qestStr.split("<br/>").map((line) => {
-    return (
-      <span key={line}>
-        {line}
-        <br />
-      </span>
-    );
-  });
+  const { qestNum, qestStr } = useMemo(() => {
+    return {
+      qestNum: `문제 ${question["qitemNo"]}`,
+      qestStr: question["question"],
+    };
+  }, [question]);
 
-  const answer = [];
+  const AnswerSelect = [];
   for (let i = 1; i < 11; i++) {
     // 답안은 있는데, 점수가 반영이 안 된 경우 해당 답안을 힌트로 바꾼다
     if (question["answer0" + i] == null) continue;
@@ -22,7 +21,7 @@ const Card = ({ question, onSelect, answers }) => {
       continue;
 
     // 답안을 순서대로 넣는다
-    answer.push(
+    AnswerSelect.push(
       // <Button onClick={handleClick} value={question["answerScore" + index]}>
       //   {question["answer" + index]}
       // </Button>
@@ -39,13 +38,22 @@ const Card = ({ question, onSelect, answers }) => {
             if (typeof handleChange === "function") {
               // i : 답이 몇 번째 선택사항인지
               // e.target.id : 답이 몇 번째 문제 인지
-              console.log(i, e.target.name, e.target.value);
+              // const element = document.getElementById(e.target.id);
+              window.scrollBy(0, 0.3 * window.innerHeight);
               handleChange(i, e.target.name, e.target.value);
             }
           }}
         />
         <label
-          className="btn btn-outline-primary"
+          className="btn btn-outline-primary justify-center"
+          style={{
+            width: "15vw",
+            height: "10vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            fontSize: "1.8rem",
+          }}
           htmlFor={`${question["qitemNo"]}-${i}`}
         >
           {question["answer0" + i]}
@@ -55,45 +63,36 @@ const Card = ({ question, onSelect, answers }) => {
   }
 
   return (
-    <div
-      claseName="container"
-      style={{
-        margin: "14 0",
-        display: "block",
-        width: "100%",
-        justifyContent: "center",
-        backgroundColor: "#F18805",
-        color: "white",
-        padding: "10 10",
-      }}
-    >
-      <div claseName="question">
-        {qestStr.split("<br/>").map((line) => {
-          return (
-            <p key={line}>
-              {line}
-              <br />
-            </p>
-          );
-        })}
-      </div>
-      <div
-        className="answer justify-center"
-        role="group"
-        aria-label="Basic radio toggle button group"
-      >
-        {answer.map((value, index = 0) => {
-          return (
-            <div key={value + index++} className="form-check form-check-inline">
-              {value}
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <Card className="text-center" style={{ width: "90%" }}>
+      <Card.Header>
+        <b>{qestNum}</b>
+      </Card.Header>
+      <Card.Body>
+        <Card.Title style={{ marginTop: "1vh", marginBottom: "0vh" }}>
+          <h4>{qestStr}</h4>
+        </Card.Title>
+        <div
+          className="answer justify-center"
+          role="group"
+          aria-label="Basic radio toggle button group"
+          style={{ marginTop: "3vh" }}
+        >
+          {AnswerSelect.map((value, index = 0) => {
+            return (
+              <div
+                key={value + index++}
+                className="form-check form-check-inline"
+              >
+                {value}
+              </div>
+            );
+          })}
+        </div>
+      </Card.Body>
+    </Card>
   );
 };
-export default Card;
+export default Question;
 
 // {
 //   "question": "직장에서 업무에 필요한 전화연락, 우편물, 서류 등을 정리한다.",

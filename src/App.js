@@ -5,7 +5,7 @@ import PsychoTest from "./PsychoTest/PsychoTest";
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="App justify-content">
         <PsychoTest />
       </div>
     </Router>
