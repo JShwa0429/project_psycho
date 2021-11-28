@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 import Progress from "./progress";
 import Completed from "./completed";
 import Loading from "../Loading";
-
+import { apikey, Seq } from "../../etc/data";
 const Test = ({ onSave }) => {
   // Store 에 데이터를 저장할 함수를 받아옵니다
   const history = useHistory(); // 페이지 이동용 history
@@ -15,8 +15,7 @@ const Test = ({ onSave }) => {
 
   // 문제 GET API
   const getQuestion = useCallback(() => {
-    const key = "a4c80b03ef9a8b8df73cf7b36775257c";
-    const url = `https://www.career.go.kr/inspct/openapi/test/questions?apikey=${key}&q=6`;
+    const url = `https://www.career.go.kr/inspct/openapi/test/questions?apikey=${apikey}&q=${Seq}`;
     let result = [];
 
     axios

@@ -74,7 +74,7 @@ const Progress = ({
           return (
             <div className="question">
               <Question
-                key={question + index++}
+                key={Math.random()}
                 question={question}
                 onSelect={handleSelect}
               />
