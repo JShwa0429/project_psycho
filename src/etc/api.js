@@ -5,9 +5,8 @@ const axios = Axios.create({
 });
 
 const api = {};
-// const QUESTION_SEQ = "6";
 
-api.getJobs = async ({ no1, no2 }) => {
+api.getJob = async ({ no1, no2 }) => {
   const res = await axios.get(
     "https://inspct.career.go.kr/inspct/api/psycho/value/jobs",
     {
@@ -19,7 +18,7 @@ api.getJobs = async ({ no1, no2 }) => {
   }
 };
 
-api.getMajors = async ({ no1, no2 }) => {
+api.getMajor = async ({ no1, no2 }) => {
   const res = await axios.get(
     "https://inspct.career.go.kr/inspct/api/psycho/value/majors",
     {

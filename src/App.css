@@ -25,14 +25,14 @@ label {
 div .home {
   border: 1px solid skyblue;
   position: relative;
-  height: 80vh;
-  width: 100vw;
+  height: 85vh;
+  width: auto;
   margin: 0;
   background-color: #edf7fc;
 }
 
 div .home-left {
-  width: 50vw;
+  width: 50%;
   display: flex;
   justify-content: right;
   align-content: center;
@@ -88,17 +88,14 @@ div .question {
 }
 
 div .answer {
-  margin: 1vh;
+  margin: 1vh 1vw;
   margin-top: 5vh;
-}
-
-div .btn-move {
-  margin-bottom: 5vh;
 }
 
 div .test {
   background-color: #edf7fc;
-  min-width: 100vh;
+  width: auto;
+  height: auto;
 }
 
 img {
@@ -125,12 +122,6 @@ img {
   justify-content: right;
 }
 
-.completed img {
-  width: auto;
-  height: 30vh;
-  margin: 5vh 30%;
-}
-
 .completed {
   text-align: center;
   height: auto;
@@ -138,9 +129,21 @@ img {
   padding: 5vh 0;
 }
 
+.completed img {
+  width: auto;
+  height: auto;
+  margin: 5vh 30%;
+}
+
 div .result {
-  padding: 5vh 10vw;
-  width: 80%;
+  background-color: #edf7fc;
+  padding: 5vh;
+  width: auto;
+  height: auto;
+}
+
+a:hover {
+  color: skyblue;
 }
 
 td > a {

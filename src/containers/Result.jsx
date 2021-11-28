@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Result from "../components/Result/result";
+import Result from "../components/Result/Result";
 
 function MapReduxStateToReactProps(state) {
   return { user: state.user, answers: state.answers };

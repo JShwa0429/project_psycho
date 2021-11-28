@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { interpretationNames } from "../../static/js/data";
+import { ValueList } from "../../etc/data";
 const Chart = ({ data }) => {
   const maxScore = useMemo(() => {
     if (Array.isArray(data)) {
@@ -26,9 +26,8 @@ const Chart = ({ data }) => {
     <div
       style={{
         position: "relative",
-        width: "100%",
+        width: "auto",
         height: "auto",
-        marginBottom: 48,
       }}
     >
       <table>{rows}</table>
@@ -75,20 +74,18 @@ const Chart = ({ data }) => {
                   >
                     {value?.score}
                   </div>
-
-                  <div
-                    className="text-secondary"
-                    style={{
-                      textAlign: "center",
-                      position: "absolute",
-                      top: "100%",
-                      width: "100%",
-                      fontSize: "1vw",
-                      paddingTop: 8,
-                    }}
-                  >
-                    {interpretationNames[value?.seq - 1]}
-                  </div>
+                </div>
+                <div
+                  className="text-secondary"
+                  style={{
+                    textAlign: "center",
+                    position: "absolute",
+                    top: "100%",
+                    width: "auto",
+                    fontSize: "1em",
+                  }}
+                >
+                  {ValueList[value?.seq - 1]}
                 </div>
               </div>
             );

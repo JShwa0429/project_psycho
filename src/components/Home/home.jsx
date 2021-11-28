@@ -12,10 +12,9 @@ import { useHistory } from "react-router";
 // - 이름을 올바르게 입력하지 않았을 경우, 이에 대한 안내 메세지를 출력합니다.
 // - 성별을 선택하지 않았을 경우, 이에 대한 안내 메세지를 출력합니다.
 
-const Home = ({ onClick }) => {
+const Home = ({ onSaveUser }) => {
   const [name, setName] = useState("");
   const [selectedGender, setSelectedGender] = useState(null);
-  const seq = 6;
   const history = useHistory();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,11 +22,10 @@ const Home = ({ onClick }) => {
     const user = {};
     user["name"] = name;
     user["gender"] = selectedGender;
-    user["seq"] = seq;
     user["startDtm"] = timestamp;
 
-    //Dispatch profile
-    onClick(user);
+    //Dispatch
+    onSaveUser(user);
     // history를 통해 검사시작 화면으로 이동
     history.push("/test");
   };
@@ -56,7 +54,7 @@ const Home = ({ onClick }) => {
           <Form.Floating
             className="Form mb-3"
             onSubmit={handleSubmit}
-            style={{ fontSize: "3vh" }}
+            style={{ fontSize: "1em" }}
           >
             <FloatingLabel
               controlId="floatingInput"
@@ -68,7 +66,7 @@ const Home = ({ onClick }) => {
                 style={{
                   width: "90%",
                   height: "8vh",
-                  fontSize: "3vh",
+                  fontSize: "1em",
                   textAlign: "center",
                 }}
                 type="text"
@@ -88,17 +86,20 @@ const Home = ({ onClick }) => {
                 type="radio"
                 className="btn-check"
                 name="gender"
+                checked={selectedGender === "100205"}
                 id="100205"
+                readOnly
                 onClick={handleClick}
               />
               <label
-                className="btn "
+                className="btn btn-outline-primary"
                 htmlFor="100205"
                 style={{
-                  width: "40%",
-                  fontSize: "1em",
-                  paddingTop: "1.3vh",
-                  marginRight: "0vh",
+                  width: "8vw",
+                  height: "10vh",
+                  fontSize: "2vw",
+                  paddingTop: "2vh",
+                  marginRight: "0vw",
                   color: "skyblue",
                   border: "1px solid skyblue",
                 }}
@@ -109,17 +110,20 @@ const Home = ({ onClick }) => {
                 type="radio"
                 className="btn-check"
                 name="gender"
+                checked={selectedGender === "100206"}
                 id="100206"
+                readOnly
                 onClick={handleClick}
               />
               <label
-                className="btn"
+                className="btn btn-outline-primary"
                 htmlFor="100206"
                 style={{
-                  marginLeft: "2vh",
-                  width: "40%",
-                  fontSize: "1em",
-                  paddingTop: "1.3vh",
+                  marginLeft: "2vw",
+                  width: "8vw",
+                  height: "10vh",
+                  fontSize: "2vw",
+                  paddingTop: "2vh",
                   color: "skyblue",
                   border: "1px solid skyblue",
                 }}
@@ -135,9 +139,9 @@ const Home = ({ onClick }) => {
                 variant="outline-primary"
                 type="submit"
                 style={{
-                  marginLeft: "2vh",
+                  marginLeft: "1vw",
                   width: "100%",
-                  fontSize: "5vh",
+                  fontSize: "1.5em",
                   paddingTop: "1vh",
                 }}
                 disabled={!(name && selectedGender)}

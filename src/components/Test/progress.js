@@ -5,21 +5,23 @@ import Button from "react-bootstrap/Button";
 
 const Progress = ({
   questions,
-  currentPageIndex,
+  currentPage,
   cut,
   onMove,
   onSave,
   testState,
 }) => {
+  const len = useMemo(() => {
+    return questions.length;
+  }, [questions]);
+
   const [selectedAnswer, setSelectedAnswer] = useState([{}, {}]);
 
-  const len = questions.length;
-
   const visibleQuestions = useMemo(() => {
-    return questions.length > 1
-      ? questions.slice((currentPageIndex - 2) * 5, (currentPageIndex - 1) * 5)
+    return len > 1
+      ? questions.slice((currentPage - 2) * 5, (currentPage - 1) * 5)
       : questions;
-  }, [questions, currentPageIndex]);
+  }, [questions, currentPage, len]);
 
   const progressPercentage = useMemo(() => {
     return selectedAnswer
@@ -29,10 +31,10 @@ const Progress = ({
 
   const disable = useMemo(() => {
     return (
-      ((cut * (currentPageIndex - 1)) / len) * 100 > progressPercentage &&
+      ((cut * (currentPage - 1)) / len) * 100 > progressPercentage &&
       progressPercentage !== 100
     );
-  }, [cut, len, currentPageIndex, progressPercentage]);
+  }, [cut, len, currentPage, progressPercentage]);
 
   const handleSelect = (i, qitemNo, score) => {
     //    i 는 답변의 번호
@@ -62,10 +64,13 @@ const Progress = ({
               <h1>{Math.round(progressPercentage)}%</h1>
             </div>
           </div>
-          <ProgressBar now={progressPercentage} />
+          <ProgressBar
+            variant={disable ? "danger" : ""}
+            now={progressPercentage}
+          />
         </div>
 
-        {visibleQuestions.map((question, index = 0) => {
+        {visibleQuestions.map((question, index = 1) => {
           return (
             <div className="question">
               <Question
@@ -78,7 +83,7 @@ const Progress = ({
         })}
       </div>
 
-      <div className="btn-move">
+      <div className="btn-move" style={{ textAlign: "center" }}>
         <Button
           variant="secondary"
           style={{ float: "left", fontSize: "2em" }}
@@ -97,6 +102,18 @@ const Progress = ({
           disabled={disable}
         >
           다음으로
+        </Button>
+
+        <Button
+          size="lg"
+          variant="outline-primary"
+          style={{ fontSize: "2em" }}
+          id="next"
+          onClick={() => {
+            window.scrollTo(0, 0);
+          }}
+        >
+          위로 가기
         </Button>
       </div>
     </div>

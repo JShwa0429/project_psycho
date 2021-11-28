@@ -13,13 +13,15 @@ const Question = ({ question, onSelect, answers }) => {
     };
   }, [question]);
 
+  let count = 1;
   const AnswerSelect = [];
   for (let i = 1; i < 11; i++) {
     // 답안은 있는데, 점수가 반영이 안 된 경우 해당 답안을 힌트로 바꾼다
     if (question["answer0" + i] == null) continue;
-    if (question["answerScore0" + i] == null || question["answer0" + i] == null)
+    if (question["answerScore0" + i] == null) {
+      question[`tip${count++}Score`] = question["answer0" + i];
       continue;
-
+    }
     // 답안을 순서대로 넣는다
     AnswerSelect.push(
       // <Button onClick={handleClick} value={question["answerScore" + index]}>
@@ -34,12 +36,13 @@ const Question = ({ question, onSelect, answers }) => {
           id={`${question["qitemNo"]}-${i}`}
           value={`${question["answerScore0" + i]}`}
           checked={answers?.index?.[question["qitemNo"]] === i}
+          readOnly
           onClick={(e) => {
             if (typeof handleChange === "function") {
               // i : 답이 몇 번째 선택사항인지
               // e.target.id : 답이 몇 번째 문제 인지
               // const element = document.getElementById(e.target.id);
-              window.scrollBy(0, 0.3 * window.innerHeight);
+              window.scrollBy(0, 0.5 * window.innerHeight);
               handleChange(i, e.target.name, e.target.value);
             }
           }}
@@ -63,12 +66,14 @@ const Question = ({ question, onSelect, answers }) => {
   }
 
   return (
-    <Card className="text-center" style={{ width: "90%" }}>
+    <Card className="text-center" style={{ width: "100%" }}>
       <Card.Header>
         <b>{qestNum}</b>
       </Card.Header>
       <Card.Body>
-        <Card.Title style={{ marginTop: "1vh", marginBottom: "0vh" }}>
+        <Card.Title
+          style={{ marginTop: "1vh", marginBottom: "0vh", fontSize: "1em" }}
+        >
           <h4>{qestStr}</h4>
         </Card.Title>
         <div
@@ -77,12 +82,9 @@ const Question = ({ question, onSelect, answers }) => {
           aria-label="Basic radio toggle button group"
           style={{ marginTop: "3vh" }}
         >
-          {AnswerSelect.map((value, index = 0) => {
+          {AnswerSelect.map((value) => {
             return (
-              <div
-                key={value + index++}
-                className="form-check form-check-inline"
-              >
+              <div key={Math.random()} className="form-check form-check-inline">
                 {value}
               </div>
             );

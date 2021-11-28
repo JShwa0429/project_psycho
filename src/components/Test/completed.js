@@ -11,13 +11,10 @@ const Completed = () => {
         <br />
         중요 가치를 충족시켜줄 수 있는 직업에 대해 생각해 볼 기회를 제공합니다.
       </p>
-      <br />
-      <br />
-      <br />
       <div
         style={{
-          width: "100%",
-          height: "20vh",
+          width: "auto",
+          height: "auto",
           margin: "0",
           display: "flex",
           justifyContent: "center",
@@ -27,9 +24,9 @@ const Completed = () => {
           to={`/result`}
           className="btn btn-outline-success"
           style={{
-            width: "50%",
-            height: "50%",
-            fontSize: "5vh",
+            width: "auto",
+            height: "auto",
+            fontSize: "2em",
           }}
         >
           결과 보기

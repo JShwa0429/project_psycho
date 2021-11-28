@@ -1,6 +1,6 @@
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
-import PsychoTest from "./PsychoTest/PsychoTest";
+import PsychoTest from "../src/components/PsychoTest";
 
 function App() {
   return (
