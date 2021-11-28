@@ -1,6 +1,3 @@
-export const apikey = "a4c80b03ef9a8b8df73cf7b36775257c";
-export const Seq = 6;
-
 export const qestnrSeqMap = new Map([
   ["4", "직업흥미검사(K) – 중학생"],
   ["5", "직업흥미검사(K) – 고등학생"],
@@ -45,7 +42,6 @@ export const qestnrSeqList = [];
 qestnrSeqMap.forEach((key, value) => {
   qestnrSeqList.push([key, value]);
 });
-
 export const trgetSe = new Map();
 trgetSe.set("초등학생", "100205");
 trgetSe.set("중학생", "100206");
@@ -56,12 +52,12 @@ trgetSe.set("일반(학부모)", "100210");
 trgetSe.set("교사", "100214");
 trgetSe.set("교사(상담)", "100215");
 
-export const genderList = {
+export const gender = {
   100205: "남자",
   100206: "여자",
 };
 
-export const educationList = [
+export const educationLevelNames = [
   "중졸이하",
   "고졸",
   "전문대졸",
@@ -69,7 +65,7 @@ export const educationList = [
   "대학원졸",
 ];
 
-export const majorList = [
+export const majorNames = [
   "계열무관",
   "인문",
   "사회",
@@ -80,7 +76,7 @@ export const majorList = [
   "예체능",
 ];
 
-export const ValueList = [
+export const interpretationNames = [
   "능력발휘",
   "자율성",
   "보수",
