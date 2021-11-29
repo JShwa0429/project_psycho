@@ -101,20 +101,22 @@ const Progress = ({
           onClick={onMove}
           disabled={disable}
         >
-          다음으로
+          {currentPage === 1 ? "검사시작" : "다음으로"}
         </Button>
 
-        <Button
-          size="lg"
-          variant="outline-primary"
-          style={{ fontSize: "2em" }}
-          id="next"
-          onClick={() => {
-            window.scrollTo(0, 0);
-          }}
-        >
-          위로 가기
-        </Button>
+        {currentPage !== 1 && (
+          <Button
+            size="lg"
+            variant="outline-primary"
+            style={{ fontSize: "2em" }}
+            id="next"
+            onClick={() => {
+              window.scrollTo(0, 0);
+            }}
+          >
+            위로 가기
+          </Button>
+        )}
       </div>
     </div>
   );
